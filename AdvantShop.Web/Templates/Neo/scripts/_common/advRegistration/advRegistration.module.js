@@ -2,6 +2,8 @@ import './advRegistration.base.js';
 import './fio-validator.service.js';
 import './fio-input.directive.js';
 import './password-match.directive.js';
+import './phone-validator.service.js';
+import './registration-phone.directive.js';
 import registrationTemplate from './registration.template.html';
 
 const MODULE_NAME = 'advRegistration';
