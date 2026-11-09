@@ -1,4 +1,4 @@
-﻿<form class="registration" name="registrationForm" data-adv-registration-phone="$ctrl.registration.Phone" data-adv-registration-phone-customer-type="$ctrl.registration.CustomerType">
+﻿<form class="registration" name="registrationForm" data-ng-class="{'adv-phone-invalid': registrationForm.$error.advPhone}" data-adv-registration-phone="$ctrl.registration.Phone" data-adv-registration-phone-customer-type="$ctrl.registration.CustomerType">
     <div class="registration-customer-type"
          data-ng-if="$ctrl.settings.AllCustomerTypes">
         <label data-ng-repeat="customerType in $ctrl.settings.CustomerTypes">

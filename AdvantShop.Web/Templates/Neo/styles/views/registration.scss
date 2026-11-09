@@ -5,3 +5,13 @@
     line-height: 1.4;
     text-align: left;
 }
+
+form.registration.adv-phone-invalid phone-field input[type='tel'] {
+    border-color: #e74c3c;
+    background-color: #fdf2f2;
+    box-shadow: 0 0 0 1px #e74c3c inset;
+
+    &:focus {
+        box-shadow: 0 0 0 1px #e74c3c inset;
+    }
+}
