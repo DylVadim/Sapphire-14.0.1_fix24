@@ -46,9 +46,9 @@
                            data-autocompleter-disabled="{{$ctrl.settings.SuggestionsModule == null || $ctrl.settings.SuggestionsModule.SuggestFullNameInClient !== true}}"
                            data-autocomplete-debounce="400" />
                 </span>
-                        <div class="adv-form-field__error-text" data-ng-if="registrationForm.FirstName.$error.required && (registrationForm.FirstName.$touched || registrationForm.$submitted)">Поле обязательно для заполнения.</div>
+                        <div class="adv-form-field__error-slot"><div class="adv-form-field__error-text" data-ng-if="registrationForm.FirstName.$error.required && (registrationForm.FirstName.$touched || registrationForm.$submitted)">Поле обязательно для заполнения.</div>
                         <div class="adv-form-field__error-text" data-ng-if="registrationForm.FirstName.$error.fioFormat && (registrationForm.FirstName.$touched || registrationForm.$submitted)">Используйте только русские буквы и дефис (цифры, пробелы, спецсимволы недопустимы)</div>
-            </span>
+            </div></span>
                 </label>
 
                 <label class="row middle-xs form-field-control"
@@ -80,9 +80,9 @@
                                data-autocompleter-disabled="{{$ctrl.settings.SuggestionsModule == null || $ctrl.settings.SuggestionsModule.SuggestFullNameInClient !== true}}"
                                data-autocomplete-debounce="400" />
                     </span>
-                        <div class="adv-form-field__error-text" data-ng-if="registrationForm.LastName.$error.required && (registrationForm.LastName.$touched || registrationForm.$submitted)">Поле обязательно для заполнения.</div>
+                        <div class="adv-form-field__error-slot"><div class="adv-form-field__error-text" data-ng-if="registrationForm.LastName.$error.required && (registrationForm.LastName.$touched || registrationForm.$submitted)">Поле обязательно для заполнения.</div>
                         <div class="adv-form-field__error-text" data-ng-if="registrationForm.LastName.$error.fioFormat && (registrationForm.LastName.$touched || registrationForm.$submitted)">Используйте только русские буквы и дефис (цифры, пробелы, спецсимволы недопустимы)</div>
-                </span>
+                </div></span>
                 </label>
 
                 <label class="row middle-xs form-field-control"
@@ -114,9 +114,9 @@
                                data-autocompleter-disabled="{{$ctrl.settings.SuggestionsModule == null || $ctrl.settings.SuggestionsModule.SuggestFullNameInClient !== true}}"
                                data-autocomplete-debounce="400" />
                     </span>
-                        <div class="adv-form-field__error-text" data-ng-if="registrationForm.Patronymic.$error.required && (registrationForm.Patronymic.$touched || registrationForm.$submitted)">Поле обязательно для заполнения.</div>
+                        <div class="adv-form-field__error-slot"><div class="adv-form-field__error-text" data-ng-if="registrationForm.Patronymic.$error.required && (registrationForm.Patronymic.$touched || registrationForm.$submitted)">Поле обязательно для заполнения.</div>
                         <div class="adv-form-field__error-text" data-ng-if="registrationForm.Patronymic.$error.fioFormat && (registrationForm.Patronymic.$touched || registrationForm.$submitted)">Используйте только русские буквы и дефис (цифры, пробелы, спецсимволы недопустимы)</div>
-                </span>
+                </div></span>
                 </label>
 
             </div>
@@ -126,15 +126,20 @@
                              data-ng-required="$ctrl.settings.IsRequiredEmail || !$ctrl.settings.AuthByCodeActive"
                              data-show-email-confirmation="$ctrl.settings.UseEmailConfirmation">
                 </email-field>
-                <phone-field data-ng-if="($ctrl.settings.IsShowPhone || $ctrl.settings.IsBonusSystemActive) && $ctrl.method !== 'code'"
-                             data-ng-model="$ctrl.registration.Phone"
-                             data-ng-required="$ctrl.settings.IsRequiredPhone || $ctrl.settings.IsBonusSystemActive"
-                             data-label="$ctrl.settings.CustomerPhoneField"
-                             data-show-phone-confirmation="$ctrl.settings.UsePhoneConfirmation"
-                             data-enable-mask="$ctrl.settings.EnablePhoneMask">
-                </phone-field>
-                <div class="adv-form-field__error-text" data-ng-if="registrationForm.$error.advPhone && registrationForm.$dirty">Неверный формат. Введите мобильный номер телефона РФ в формате +7 (9XX)</div>
-                <div class="adv-form-field__error-text" data-ng-if="registrationForm.$error.advPhoneRequired && registrationForm.$submitted">Поле номера телефона обязательно для заполнения.</div>
+                <div class="adv-phone-field-wrap">
+                    <phone-field data-ng-if="($ctrl.settings.IsShowPhone || $ctrl.settings.IsBonusSystemActive) && $ctrl.method !== 'code'"
+                                 data-ng-model="$ctrl.registration.Phone"
+                                 data-ng-required="$ctrl.settings.IsRequiredPhone || $ctrl.settings.IsBonusSystemActive"
+                                 data-label="$ctrl.settings.CustomerPhoneField"
+                                 data-show-phone-confirmation="$ctrl.settings.UsePhoneConfirmation"
+                                 data-enable-mask="$ctrl.settings.EnablePhoneMask">
+                    </phone-field>
+                    <div class="adv-form-field__error-slot">
+                        <div class="adv-form-field__error-text" data-ng-if="registrationForm.$error.advPhone && registrationForm.$dirty && $ctrl.registration.CustomerType !== 'LegalEntity'">Неверный формат. Введите мобильный номер телефона РФ в формате +7 (9XX)</div>
+                        <div class="adv-form-field__error-text" data-ng-if="registrationForm.$error.advPhone && registrationForm.$dirty && $ctrl.registration.CustomerType === 'LegalEntity'">Неверный формат. Введите номер телефона РФ в формате +7 (XXX) XXX-XX-XX</div>
+                        <div class="adv-form-field__error-text" data-ng-if="registrationForm.$error.advPhoneRequired && registrationForm.$submitted">Поле номера телефона обязательно для заполнения.</div>
+                    </div>
+                </div>
             </div>
 
             <label class="row middle-xs form-field-control"
@@ -213,8 +218,8 @@
                                   }"> </span>
                          </a>
                      </span>
-                        <div class="adv-form-field__error-text" data-ng-if="registrationForm.Password.$error.required && (registrationForm.Password.$touched || registrationForm.$submitted)">Поле обязательно для заполнения.</div>
-                 </span>
+                        <div class="adv-form-field__error-slot"><div class="adv-form-field__error-text" data-ng-if="registrationForm.Password.$error.required && (registrationForm.Password.$touched || registrationForm.$submitted)">Поле обязательно для заполнения.</div>
+                 </div></span>
                  </label>
 
                 <label class="row middle-xs form-field-control">
@@ -242,9 +247,9 @@
                                   }"> </span>
                          </a>
                      </span>
-                        <div class="adv-form-field__error-text" data-ng-if="registrationForm.PasswordConfirm.$error.required && (registrationForm.PasswordConfirm.$touched || registrationForm.$submitted)">Поле обязательно для заполнения.</div>
+                        <div class="adv-form-field__error-slot"><div class="adv-form-field__error-text" data-ng-if="registrationForm.PasswordConfirm.$error.required && (registrationForm.PasswordConfirm.$touched || registrationForm.$submitted)">Поле обязательно для заполнения.</div>
                         <div class="adv-form-field__error-text" data-ng-if="registrationForm.PasswordConfirm.$error.passwordMatch && (registrationForm.PasswordConfirm.$touched || registrationForm.$submitted)">Пароли не совпадают</div>
-                 </span>
+                 </div></span>
                  </label>
              </div>
 

@@ -18,14 +18,18 @@
                     var isFilled = rawDigits.length > 0;
                     var isValid;
 
-                    if (isLegal || !isFilled) {
-                        // Для юрлица строгую проверку мобильного РФ не применяем.
+                    if (!isFilled) {
                         isValid = true;
                     } else {
-                        // У физлица любой непустой номер должен быть мобильным РФ +7 (9XX):
-                        // 11 цифр, начинается с 7, вторая — 9. Международные/городские — ошибка.
                         var digits = advPhoneValidatorService.normalize(phone);
-                        isValid = digits != null && advPhoneValidatorService.validate(digits);
+
+                        // Физлицо: только мобильный РФ +7 (9XX).
+                        // Юрлицо: любой номер РФ +7 (XXX) — стационарные разрешены.
+                        isValid =
+                            digits != null &&
+                            (isLegal
+                                ? advPhoneValidatorService.validateRf(digits)
+                                : advPhoneValidatorService.validate(digits));
                     }
 
                     formCtrl.$setValidity('advPhone', isValid);
@@ -36,6 +40,12 @@
                     [attrs.advRegistrationPhone, attrs.advRegistrationPhoneCustomerType],
                     validate,
                 );
+
+                // Переключатель физ/юр и маска могут менять модель без изменения watch-выражения —
+                // пересчитываем валидность на change внутри формы.
+                element.on('change', function () {
+                    scope.$evalAsync(validate);
+                });
 
                 validate();
             }
