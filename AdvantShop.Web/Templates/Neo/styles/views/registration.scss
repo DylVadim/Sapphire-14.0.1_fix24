@@ -1,0 +1,32 @@
+.adv-form-field__error-text {
+    margin-top: 0;
+    color: #e74c3c;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: left;
+}
+
+// Фиксированный слот под ошибки: 4px отступ + 2 строки текста = 38px.
+// Не даёт форме «прыгать» при появлении/исчезновении ошибки.
+.adv-form-field__error-slot {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 38px;
+    padding-top: 4px;
+}
+
+.adv-phone-field-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+form.registration.adv-phone-invalid phone-field input[type='tel'] {
+    border-color: #e74c3c;
+    background-color: #fdf2f2;
+    box-shadow: 0 0 0 1px #e74c3c inset;
+
+    &:focus {
+        box-shadow: 0 0 0 1px #e74c3c inset;
+    }
+}

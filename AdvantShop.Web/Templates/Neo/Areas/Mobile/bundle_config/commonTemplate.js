@@ -14,6 +14,7 @@ import '../../../styles/partials/gallery.scss';
 import '../../../styles/partials/product-reviews.scss';
 
 import '../../../styles/views/checkout.scss';
+import '../../../styles/views/registration.scss';
 
 import '../../../scripts/_common/spinbox/styles/spinbox.scss';
 import '../../../scripts/_common/carousel/styles/carousel.scss';
@@ -61,6 +62,8 @@ import '../../../scripts/_partials/order/order';
 import '../../../scripts/_partials/order-product/orderProduct.module.js';
 
 import '../scripts/_partials/cart/cart.module.js';
+import advRegistrationModule from '../../../scripts/_common/advRegistration/advRegistration.module.js';
+appDependency.addItem(advRegistrationModule);
 import '../scripts/_partials/order/styles/orderHistory.scss';
 
 import "../../../features/sticky-buy-button"
